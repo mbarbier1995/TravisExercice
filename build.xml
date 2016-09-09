@@ -1,20 +1,46 @@
-<?xml version="1.0"?>
-<project name="TravisExercise" default="compile">
-	<property name="builddir" location="bin" />
-
-	<path id="TravisExercise.classpath">
-		<pathelement location="${builddir}"/>
-	</path>
-
-	<target name="init">
-		<mkdir dir="${builddir}" />
-	</target>
-
-	<target name="compile" depends="init">
-        <javac destdir="${builddir}" includeantruntime="false">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="TravisExercice">
+    <property environment="env"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="TravisExercice.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="../TravisExercise/lib/junit.jar"/>
+        <pathelement location="../TravisExercise/lib/org.hamcrest.core_1.3.0.v201303031735.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="test">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
             <src path="src"/>
-            <classpath refid="TravisExercise.classpath"/>
+            <src path="test"/>
+            <classpath refid="TravisExercice.classpath"/>
         </javac>
-	</target>
-
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
 </project>
