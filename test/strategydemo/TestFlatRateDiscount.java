@@ -28,8 +28,12 @@ public class TestFlatRateDiscount {
 
 	@Test
 	public void test() {
-		Order order = new Order ("Jphn",20.24f);
-		
+		Order order = new Order("John", 200.24f);
+		float discount = 10; 
+		FlatRateDiscountStrategy strategy = new FlatRateDiscountStrategy(discount);
+		order.setStrategy(strategy);
+		assertEquals(190.24, order.getDiscountedPrice(), 0.00001);
 	}
 
 }
+//ad depends on build file
